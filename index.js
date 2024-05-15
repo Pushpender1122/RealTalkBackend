@@ -33,6 +33,21 @@ io.on("connection", (socket) => {
             socket.broadcast.to(room).emit('user-disconnected', userId);
         });
     });
+
+    socket.on('chatMessage', (message, username) => {
+        socket.broadcast.emit('message', { user: username, content: message });
+    });
+
+    socket.on('join-room:chat', (room, username) => {
+        socket.join(room);
+        // socket.broadcast.to(room).emit('user-connected', username);
+    });
+
+    socket.on('disconnect', () => {
+        // Handle user disconnection here
+        console.log("a user disconnected");
+    });
+
 });
 
 server.listen(port, () => {
