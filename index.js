@@ -11,7 +11,7 @@ const io = new Server(server, {
         methods: ["GET", "POST"]
     }
 });
-const port = 8000;
+const port = process.env.PORT || 8000;
 let clients = [];
 app.get("/", (req, res) => {
     res.send("Hello World!");
